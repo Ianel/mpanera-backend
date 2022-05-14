@@ -1,4 +1,5 @@
 const controllers = require('../controllers/auth.controllers');
+const express = require('express');
 const router = express.Router();
 
 router 
@@ -8,3 +9,6 @@ router
 router
     .route('/register')
     .post(controllers.register);
+
+
+module.exports = router;

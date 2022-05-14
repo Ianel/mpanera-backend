@@ -1,4 +1,5 @@
 const controllers = require("../controllers/housing.controllers");
+const express = require('express');
 const router = express.Router();
 
 router
@@ -12,3 +13,5 @@ router
     .patch(controllers.updateHouse)
     .delete(controllers.deleteHouse);
 
+
+module.exports = router;
