@@ -1,3 +1,5 @@
+const pool = require('../config/db.config');
+
 exports.createHouse = () => {};
 
 exports.getHouse = () => {};
