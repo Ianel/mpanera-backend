@@ -1,40 +1,44 @@
-const { Pool, Client } = require('pg');
+const { Pool, Client } = require("pg");
 
 const connectWithPool = () => {
-    const pool = new Pool({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        port: process.env.DB_PORT,
-        database: process.env.DB_NAME,
-    });
+  const pool = new Pool({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
+  });
 
-    pool.on("connect", () => {
-        console.log("Database connected");
-    });
+  setTimeout(() => {
+    console.log("Database connected");
+  }, 3000);
 
-    return pool;
-}
+  return pool;
+};
 
-const connectWithClient = () => {
-    const client = new Client({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        port: process.env.DB_PORT,
-        database: process.env.DB_NAME,
-    });
+/* const connectWithClient = () => {
+  const client = new Client({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    database: process.env.DB_NAME,
+  });
 
-    client.connect();
+  client.connect();
 
-    client.on("connect", () => {
-        console.log("Database connected");
-    });
+  client.on("connect", () => {
+    console.log("Database connected");
+  });
 
-    return client;
-}
+  return client;
+};
 
-module.exports = [connectWithPool(), connectWithClient() ];
+const client = connectWithClient();
+ */
+const pool = connectWithPool();
+
+module.exports = [pool];
 
 // Database connection
 
@@ -70,7 +74,7 @@ module.exports = [connectWithPool(), connectWithClient() ];
 /* (async () => {
    /*  const poolResult = await poolDemo();
     console.log(poolResult["rows"]); */
-  /* 
+/* 
     const clientResult = await clientDemo();
     console.log({ clientResult });  
   })(); */
