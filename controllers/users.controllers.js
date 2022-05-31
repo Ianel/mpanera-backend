@@ -1,7 +1,18 @@
 // Database connection
 const [pool] = require("../config/db.config");
 
-exports.getUser = () => {};
+exports.getUser = (req, res) => {
+  const _id = req.params.id;
+
+  pool.query("SELECT * FROM users WHERE id = ?", [_id]).then((user) =>
+    res
+      .json({
+        status: "success",
+        payload: user.rows,
+      })
+      .catch((error) => console.error(error))
+  );
+};
 
 exports.getAllUsers = (req, res) => {
   pool
@@ -13,10 +24,18 @@ exports.getAllUsers = (req, res) => {
         payload: users.rows,
       })
     )
-    .catch((error) => console.error(error))
-    .finally(() => console.log("END OF REQUEST"));
+    .catch((error) => console.error(error));
 };
 
-exports.updateUser = () => {};
+exports.updateUser = (req, res) => {
+  const updatedData = req.body;
+};
 
-exports.deleteUser = () => {};
+exports.deleteUser = (req, res) => {
+  const _id = req.params.id;
+
+  pool
+    .query("DELETE FROM users WHERE id = ?", [_id])
+    .then((user) => res.json({ status: "success", payload: user.rows }))
+    .catch((error) => console.error(error));
+};
