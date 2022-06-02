@@ -9,9 +9,7 @@ const connectWithPool = () => {
     database: process.env.DB_NAME,
   });
 
-  setTimeout(() => {
-    console.log("Database connected");
-  }, 3000);
+  pool.connect();
 
   return pool;
 };
