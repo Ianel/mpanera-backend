@@ -1,5 +1,6 @@
 // Database connection
 const [pool] = require("../config/db.config");
+const db = require("../db");
 
 exports.getUser = (req, res) => {
   const _id = req.params.id;
@@ -12,6 +13,14 @@ exports.getUser = (req, res) => {
       })
       .catch((error) => console.error(error))
   );
+};
+
+exports.getUsers = async (req, res) => {
+  try {
+    const { rows } = await db.query("SELECT * FROM users");
+  } catch (error) {
+    console.error(error.message);
+  }
 };
 
 exports.getAllUsers = (req, res) => {

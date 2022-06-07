@@ -1,10 +1,26 @@
 const [pool] = require("../config/db.config");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const db = require("../db");
 
 exports.login = () => {};
 
-exports.register = () => {};
+exports.register = async (req, res) => {
+  const { tel, password } = req.body;
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await db.query("INSERT INTO users(tel, password) VALUES ($1 , $2)", [tel, hashedPassword]);
+
+    return res.status(201).json({
+      success: true,
+      message: "Registration successful"
+    });
+
+  } catch (error) {
+    console.error(error.message);
+  }
+};
 
 exports.signin = (req, res) => {
   pool
