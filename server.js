@@ -15,15 +15,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// Routers
-const usersRoutes = require("./routes/users.routes");
-const authRoutes = require("./routes/auth.routes");
-const housingRoutes = require("./routes/houses.routes");
+// Routes Handler
+const authRoutes = require("./routes/auth");
 
 // Routes
-app.use("/api/v1/users", usersRoutes);
-app.use("/api/v1/auth", authRoutes);
-app.use("/api/v1/houses", housingRoutes);
+app.use("/api/v1/auth", authRoutes)
 
 // Server connection
 app.listen(port, "localhost", (req, res) => {
