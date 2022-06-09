@@ -9,3 +9,13 @@ exports.signup = async (req, res) => {
         results: user
     });
 };
+
+exports.signin = async (req, res) => {
+    const data = [req.body.tel, req.body.password];
+    const user = await AuthService.signin(data);
+
+    res.status(200).json({
+        status: "success",
+        results: user
+    });
+};
