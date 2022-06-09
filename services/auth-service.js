@@ -1,6 +1,6 @@
 const { getUserByTel, createUserDb } = require("../db/auth.db");
 const ErrorHandler  = require("../utils/errorHandler");
-const { hashPassword } = require("../utils/password");
+const { hashPassword, comparePassword } = require("../utils/password");
 const jwt = require("jsonwebtoken");
 
 class AuthService {
@@ -22,6 +22,34 @@ class AuthService {
         return {
             token,
             user
+        };
+
+    }
+
+    async signin(data) {
+        const [ tel, password ] = data;
+
+        const userByTel = await getUserByTel(tel);
+
+        const { password: dbPassword, firstname, lastname } = userByTel;
+
+        const isPasswordCorrect = await comparePassword(password, dbPassword);
+
+        if (!userByTel) {
+            throw new ErrorHandler(403, "Invalid phone number");
+        }
+
+        if (!isPasswordCorrect) {
+            throw new ErrorHandler(403, "Invalid password");
+        }
+
+        const token = await this.signToken({ id: userByTel.user_id, phone_number: userByTel.phone_number });
+
+        userByTel.password = null;
+
+        return {
+            token,
+            user: userByTel
         };
 
     }
