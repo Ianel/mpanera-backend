@@ -12,14 +12,14 @@ const port = process.env.PORT || 5000;
 
 // Middlewares
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 // Routes Handler
 const authRoutes = require("./routes/auth");
 
 // Routes
-app.use("/api/v1/auth", authRoutes)
+app.use("/api/v1/auth", authRoutes);
 
 // Server connection
 app.listen(port, "localhost", (req, res) => {
