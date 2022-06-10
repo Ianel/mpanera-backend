@@ -19,32 +19,35 @@ CREATE TABLE users (
 
 CREATE TABLE houses (
     house_id SERIAL NOT NULL,
-    area CHARACTER VARYING(20) NOT NULL,
+    area CHARACTER VARYING(20),
     label CHARACTER VARYING(100) NOT NULL,
     city CHARACTER VARYING(50) NOT NULL,
-    postal_code INTEGER NOT NULL,
-    region CHARACTER VARYING(50) NOT NULL,
+    postal_code INTEGER,
+    region CHARACTER VARYING(50),
     country CHARACTER VARYING(50) NOT NULL,
     adress CHARACTER VARYING(200) NOT NULL,
     rent_price CHARACTER VARYING(20) NOT NULL,
     rooms_number INTEGER NOT NULL,
     description TEXT NOT NULL,
     state CHARACTER VARYING(20) NOT NULL,
-    end_date DATE NOT NULL,
+    end_date INTEGER NOT NULL,
     open_date DATE,
     published_on DATE DEFAULT CURRENT_DATE,
+    house_type_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
     PRIMARY KEY (house_id)
 );
 
 CREATE TABLE house_type (
     house_type_id SERIAL NOT NULL,
-    type CHARACTER VARYING(20) NOT NULL,
+    category CHARACTER VARYING(20) NOT NULL,
     PRIMARY KEY (house_type_id)
 );
 
 CREATE TABLE house_photo (
     house_photo_id SERIAL NOT NULL,
     path CHARACTER VARYING(50) NOT NULL,
+    house_id INTEGER NOT NULL,
     PRIMARY KEY (house_photo_id)
 );
 
@@ -52,7 +55,8 @@ CREATE TABLE rooms (
     room_id SERIAL NOT NULL,
     type CHARACTER VARYING(20) NOT NULL,
     quantity INTEGER NOT NULL,
-    PRIMARY KEY (rooom_id)
+    house_id INTEGER NOT NULL,
+    PRIMARY KEY (room_id)
 );
 
 CREATE TABLE services (
@@ -68,11 +72,15 @@ CREATE TABLE services (
 );
 
 CREATE TABLE favorite (
-    favorite_id SERIAL NOT NULL
+    favorite_id SERIAL NOT NULL,
+    user_id INTEGER NOT NULL,
+    house_id INTEGER NOT NULL,
 );
 
 CREATE TABLE offers (
-    offers_id SERIAL NOT NULL
+    offers_id SERIAL NOT NULL,
+    house_id INTEGER NOT NULL,
+    services_id INTEGER NOT NULL,
 );
 
 ALTER TABLE houses
