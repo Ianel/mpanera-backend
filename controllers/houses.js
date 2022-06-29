@@ -21,13 +21,24 @@ exports.getHouse = async (req, res) => {
 };
 
 exports.getAllHouses = async (req, res) => {
-  const { houses, nbOfHouses } = await HouseService.getAllHouses();
+  if (req.query.city) {
+    const city = req.query.city;
+    const { houses, nbOfHouses } = await HouseService.getHousesByCityName(city);
 
-  res.status(200).json({
-    status: "success",
-    itemCount: nbOfHouses,
-    results: houses,
-  });
+    res.status(200).json({
+      status: "success",
+      itemCount: nbOfHouses,
+      results: houses,
+    });
+  } else {
+    const { houses, nbOfHouses } = await HouseService.getAllHouses();
+
+    res.status(200).json({
+      status: "success",
+      itemCount: nbOfHouses,
+      results: houses,
+    });
+  }
 };
 
 exports.updateHouse = async (req, res) => {

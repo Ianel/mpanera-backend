@@ -16,7 +16,7 @@ const createHouseDb = async ({
   state,
   end_date,
   open_date,
-  house_type_id,
+  house_type,
   user_id,
 }) => {
   const { rows: houses } = await pool.query(
@@ -24,12 +24,12 @@ const createHouseDb = async ({
         (area, label, city, postal_code, region,
         country, adress,rent_price, rooms_number, 
         description, state, end_date, open_date, 
-        published_on, house_type_id, user_id) 
+        published_on, user_id, house_type) 
     VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16) RETURNING 
         area, label, city, postal_code, region,
         country, adress,rent_price, rooms_number, 
         description, state, end_date, open_date, 
-        published_on, house_type_id, user_id
+        published_on, user_id, house_type
     `,
     [
       area,
@@ -46,8 +46,8 @@ const createHouseDb = async ({
       end_date,
       open_date,
       publishedOn,
-      house_type_id,
       user_id,
+      house_type,
     ]
   );
 
@@ -71,6 +71,15 @@ const getAllHousesDb = async () => {
   return { houses, nbOfHouses };
 };
 
+const getHousesByCityNameDb = async (city) => {
+  const { rows: houses, rowCount: nbOfHouses } = await pool.query(
+    "SELECT * FROM houses WHERE city = $1",
+    [city]
+  );
+
+  return { houses, nbOfHouses };
+};
+
 const deleteHouseDb = async (id) => {
   const { rows: house } = await pool.query(
     `DELETE FROM houses WHERE house_id = $1 
@@ -78,7 +87,7 @@ const deleteHouseDb = async (id) => {
         area, label, city, postal_code, region,
         country, adress,rent_price, rooms_number, 
         description, state, end_date, open_date, 
-        published_on, house_type_id, user_id`,
+        published_on, house_type, user_id`,
     [id]
   );
 
@@ -144,6 +153,7 @@ const updateHouseDb = async (
 module.exports = {
   createHouseDb,
   getHouseByIdDb,
+  getHousesByCityNameDb,
   getAllHousesDb,
   updateHouseDb,
   deleteHouseDb,

@@ -2,6 +2,7 @@ const {
   createHouseDb,
   getHouseByIdDb,
   getAllHousesDb,
+  getHousesByCityNameDb,
   deleteHouseDb,
   updateHouseDb,
 } = require("../db/houses.db");
@@ -17,6 +18,12 @@ class HouseService {
     const house = await getHouseByIdDb(id);
 
     return house;
+  }
+
+  async getHousesByCityName(city) {
+    const { houses, nbOfHouses } = await getHousesByCityNameDb(city);
+
+    return { houses, nbOfHouses };
   }
 
   async getAllHouses() {
