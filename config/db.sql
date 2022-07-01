@@ -10,7 +10,7 @@ CREATE TABLE users (
     email CHARACTER VARYING(100) UNIQUE,
     password CHARACTER VARYING(200) NOT NULL,
     gender CHARACTER VARYING(10),
-    birthdate DATE DEFAULT CURRENT_DATE,
+    birthdate DATE DEFAULT,
     adress CHARACTER VARYING(200),
     facebook_name CHARACTER VARYING(200), 
     profile_avatar CHARACTER VARYING(50), 
@@ -33,7 +33,7 @@ CREATE TABLE houses (
     end_date INTEGER NOT NULL,
     open_date DATE,
     published_on DATE DEFAULT CURRENT_DATE,
-    house_type_id INTEGER NOT NULL,
+    house_type CHARACTER VARYING(50) NOT NULL,
     user_id INTEGER NOT NULL,
     PRIMARY KEY (house_id)
 );
@@ -83,12 +83,12 @@ CREATE TABLE offers (
     services_id INTEGER NOT NULL,
 );
 
-ALTER TABLE houses
+/* ALTER TABLE houses
     ADD FOREIGN KEY (house_type_id)
     REFERENCES house_type (house_type_id)
     ON DELETE SET NULL
     NOT VALID;
-
+ */
 ALTER TABLE houses
     ADD FOREIGN KEY (user_id)
     REFERENCES users (user_id)
