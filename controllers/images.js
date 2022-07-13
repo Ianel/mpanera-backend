@@ -27,10 +27,13 @@ exports.uploadImages = async (req, res) => {
         return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
       }
     },
-  }).array("imgCollection", 9);
+  });
+
+  module.exports = upload;
 
   const reqFiles = [];
   const url = req.protocol + "://" + req.get("host");
+  console.log(req.files);
   for (var i = 0; i < req.files.length; i++) {
     reqFiles.push(url + "/public/" + req.files[i].filename);
   }
