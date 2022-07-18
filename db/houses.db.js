@@ -29,7 +29,7 @@ const createHouseDb = async ({
         area, label, city, postal_code, region,
         country, adress,rent_price, rooms_number, 
         description, state, end_date, open_date, 
-        published_on, user_id, house_type
+        published_on, user_id, house_type, house_id
     `,
     [
       area,
