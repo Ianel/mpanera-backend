@@ -1,8 +1,8 @@
 const ImageServices = require("../services/images-services");
 
 exports.uploadImages = async (req, res) => {
-  const imagesPath = req.files.map((fileInfo) => fileInfo["path"]);
-  const { house_id } = req.body;
+  const imagesPath = req.files.map((fileInfo) => fileInfo["filename"]);
+  const { house_id } = req.params;
 
   imagesPath.forEach(async (image) => {
     let images = await ImageServices.uploadImage({
@@ -13,7 +13,7 @@ exports.uploadImages = async (req, res) => {
 
   res.status(201).json({
     status: "success",
-    results: req.files.map((fileInfo) => fileInfo["path"]),
+    results: req.files.map((fileInfo) => fileInfo["filename"]),
   });
 };
 

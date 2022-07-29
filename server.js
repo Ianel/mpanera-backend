@@ -33,6 +33,7 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/houses", housesRoutes);
 app.use("/api/v1/users", usersRoutes);
 app.use("/api/v1/images", imageRoutes);
+app.use(express.static("public"));
 app.use("/public", express.static("public"));
 
 // Server connection
