@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 // Reference environment variables
 dotenv.config({ path: ".env" });
@@ -33,8 +34,8 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/houses", housesRoutes);
 app.use("/api/v1/users", usersRoutes);
 app.use("/api/v1/images", imageRoutes);
-app.use(express.static("public"));
-app.use("/public", express.static("public"));
+app.use(express.static(path.join(__dirname, "./public")));
+//app.use("/public", express.static("public"));
 
 // Server connection
 app.listen(port, "localhost", (req, res) => {

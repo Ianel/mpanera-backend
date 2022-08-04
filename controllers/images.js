@@ -2,7 +2,7 @@ const ImageServices = require("../services/images-services");
 
 exports.uploadImages = async (req, res) => {
   const imagesPath = req.files.map((fileInfo) => fileInfo["filename"]);
-  const { house_id } = req.params;
+  const { house_id } = req.body;
 
   imagesPath.forEach(async (image) => {
     let images = await ImageServices.uploadImage({
