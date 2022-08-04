@@ -14,6 +14,13 @@ const port = process.env.PORT || 5000;
 // Middlewares
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Set static folder
+app.use(express.static("public"));
+
+// Utilisation any amin'ny front => http://localhost:4000/anaran'ilay image anaty dossier public / Exemple: http://localhost:4000/1658734441910maison-14.png
+
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(
