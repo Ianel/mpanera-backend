@@ -56,7 +56,7 @@ const createHouseDb = async ({
 
 const getHouseByIdDb = async (id) => {
   const { rows: house } = await pool.query(
-    "SELECT * FROM houses WHERE house_id = $1",
+    "SELECT houses.*, house_photo.path FROM houses, house_photo WHERE houses.house_id = $1",
     [id]
   );
 
