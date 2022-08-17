@@ -14,6 +14,7 @@ CREATE TABLE users (
     adress CHARACTER VARYING(200),
     facebook_name CHARACTER VARYING(200), 
     profile_avatar CHARACTER VARYING(50), 
+    about TEXT,
     PRIMARY KEY (user_id) 
 );
 

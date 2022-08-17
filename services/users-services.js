@@ -1,4 +1,4 @@
-const { getUserDb, getAllUsersDb } = require("../db/users.db");
+const { getUserDb, getAllUsersDb, updateUserDb } = require("../db/users.db");
 
 class UserServices {
   async getAllUsers() {
@@ -11,6 +11,12 @@ class UserServices {
     const user = await getUserDb(id);
 
     return user;
+  }
+
+  async updateUser(id, data) {
+    const updatedUser = await updateUserDb(id, data);
+
+    return updatedUser;
   }
 }
 

@@ -20,3 +20,15 @@ exports.getUser = async (req, res) => {
     results: user,
   });
 };
+
+exports.updateUser = async (req, res) => {
+  const _id = req.params.id;
+  const data = req.body;
+
+  const updatedUser = await UserServices.updateUser(_id, data);
+
+  res.status(200).json({
+    status: "success",
+    results: updatedUser,
+  });
+};
