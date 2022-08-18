@@ -9,6 +9,15 @@ const uploadImagesDb = async ({ photo_path, house_id }) => {
   return image[0];
 };
 
+const uploadUserImageDb = async ({ user_id, profile_avatar }) => {
+  const { rows: image } = await pool.query(
+    "UPDATE users SET profile_avatar = $1 WHERE user_id = $2 RETURNING user_id, profile_avatar",
+    [profile_avatar, user_id]
+  );
+
+  return image[0];
+};
+
 const getHouseImagesByIdDb = async (house_id) => {
   const { rows: images } = await pool.query(
     "SELECT path FROM house_photo WHERE house_id = $1",
@@ -18,4 +27,4 @@ const getHouseImagesByIdDb = async (house_id) => {
   return images;
 };
 
-module.exports = { uploadImagesDb, getHouseImagesByIdDb };
+module.exports = { uploadImagesDb, getHouseImagesByIdDb, uploadUserImageDb };

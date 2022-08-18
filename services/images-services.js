@@ -1,4 +1,8 @@
-const { uploadImagesDb, getHouseImagesByIdDb } = require("../db/images.db");
+const {
+  uploadImagesDb,
+  getHouseImagesByIdDb,
+  uploadUserImageDb,
+} = require("../db/images.db");
 
 class ImageServices {
   async uploadImage(data) {
@@ -11,6 +15,12 @@ class ImageServices {
     const images = await getHouseImagesByIdDb(house_id);
 
     return images;
+  }
+
+  async uploadUserImage(data) {
+    const image = await uploadUserImageDb(data);
+
+    return image;
   }
 }
 

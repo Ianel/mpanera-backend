@@ -21,7 +21,6 @@ app.use(express.static("public"));
 
 // Utilisation any amin'ny front => http://localhost:4000/anaran'ilay image anaty dossier public / Exemple: http://localhost:4000/1658734441910maison-14.png
 
-
 app.use(cors());
 app.use(bodyParser.json());
 app.use(
@@ -35,12 +34,14 @@ const authRoutes = require("./routes/auth");
 const housesRoutes = require("./routes/houses");
 const usersRoutes = require("./routes/users");
 const imageRoutes = require("./routes/images");
+const userImageRoutes = require("./routes/userImage");
 
 // Routes
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/houses", housesRoutes);
 app.use("/api/v1/users", usersRoutes);
 app.use("/api/v1/images", imageRoutes);
+app.use("/api/v1/userImage", userImageRoutes);
 app.use(express.static(path.join(__dirname, "./public")));
 //app.use("/public", express.static("public"));
 

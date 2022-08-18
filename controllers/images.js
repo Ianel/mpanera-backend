@@ -17,6 +17,21 @@ exports.uploadImages = async (req, res) => {
   });
 };
 
+exports.uploadUserImage = async (req, res) => {
+  const imagePath = req.file.filename;
+  const { user_id } = req.body;
+
+  const image = await ImageServices.uploadUserImage({
+    user_id: user_id,
+    profile_avatar: imagePath,
+  });
+
+  res.status(201).json({
+    status: "success",
+    results: image,
+  });
+};
+
 exports.getHouseImagesId = async (req, res) => {
   const { id } = req.params;
 
