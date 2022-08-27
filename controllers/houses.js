@@ -61,3 +61,12 @@ exports.deleteHouse = async (req, res) => {
     results: house,
   });
 };
+
+exports.addServices = async (req, res) => {
+  const services = await HouseService.addServices(req.body);
+
+  res.status(201).json({
+    status: "success",
+    results: services,
+  });
+};

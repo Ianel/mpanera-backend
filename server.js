@@ -35,6 +35,7 @@ const housesRoutes = require("./routes/houses");
 const usersRoutes = require("./routes/users");
 const imageRoutes = require("./routes/images");
 const userImageRoutes = require("./routes/userImage");
+const servicesRoutes = require("./routes/services");
 
 // Routes
 app.use("/api/v1/auth", authRoutes);
@@ -42,6 +43,7 @@ app.use("/api/v1/houses", housesRoutes);
 app.use("/api/v1/users", usersRoutes);
 app.use("/api/v1/images", imageRoutes);
 app.use("/api/v1/userImage", userImageRoutes);
+app.use("/api/v1/services", servicesRoutes);
 app.use(express.static(path.join(__dirname, "./public")));
 //app.use("/public", express.static("public"));
 

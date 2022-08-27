@@ -10,7 +10,7 @@ CREATE TABLE users (
     email CHARACTER VARYING(100) UNIQUE,
     password CHARACTER VARYING(200) NOT NULL,
     gender CHARACTER VARYING(10),
-    birthdate DATE DEFAULT,
+    birthdate DATE,
     adress CHARACTER VARYING(200),
     facebook_name CHARACTER VARYING(200), 
     profile_avatar CHARACTER VARYING(50), 
@@ -61,13 +61,13 @@ CREATE TABLE rooms (
 );
 
 CREATE TABLE services (
-    services_id SERIAL NOT NULL,
-    interior_toilets boolean NOT NULL,
-    outdoor_toilets boolean NOT NULL,
-    running_water boolean NOT NULL,
-    garage boolean NOT NULL,
-    pool boolean NOT NULL,
-    garden boolean NOT NULL,
+    services_id SERIAL,
+    interior_toilets boolean,
+    outdoor_toilets boolean,
+    running_water boolean,
+    garage boolean,
+    swimming_pool boolean,
+    garden boolean,
     accessibility CHARACTER VARYING (100),
     PRIMARY KEY (services_id)
 );
@@ -78,11 +78,11 @@ CREATE TABLE favorite (
     house_id INTEGER NOT NULL,
 );
 
-CREATE TABLE offers (
+/* CREATE TABLE offers (
     offers_id SERIAL NOT NULL,
     house_id INTEGER NOT NULL,
     services_id INTEGER NOT NULL,
-);
+); */
 
 /* ALTER TABLE houses
     ADD FOREIGN KEY (house_type_id)
@@ -120,12 +120,12 @@ ALTER TABLE rooms
     ON DELETE SET NULL
     NOT VALID;
 
-ALTER TABLE offers
+/* ALTER TABLE offers
     ADD FOREIGN KEY (house_id)
     REFERENCES houses (house_id)
     ON DELETE SET NULL
     NOT VALID;
-
+ */
 ALTER TABLE offers
     ADD FOREIGN KEY (services_id)
     REFERENCES services (services_id)

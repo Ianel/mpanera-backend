@@ -5,6 +5,7 @@ const {
   getHousesByCityNameDb,
   deleteHouseDb,
   updateHouseDb,
+  addServicesDb,
 } = require("../db/houses.db");
 
 class HouseService {
@@ -42,6 +43,12 @@ class HouseService {
     const house = await updateHouseDb(id, data);
 
     return house;
+  }
+
+  async addServices(data) {
+    const services = await addServicesDb(data);
+
+    return services;
   }
 }
 module.exports = new HouseService();
