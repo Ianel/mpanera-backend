@@ -1,4 +1,8 @@
-const { addServicesDb, getServicesByIdDb } = require("../db/services.db");
+const {
+  addServicesDb,
+  getServicesByIdDb,
+  updateServicesDb,
+} = require("../db/services.db");
 
 class ServicesService {
   async addServices(data) {
@@ -9,6 +13,12 @@ class ServicesService {
 
   async getServicesById(house_id) {
     const service = await getServicesByIdDb(house_id);
+
+    return service;
+  }
+
+  async updateService(id, services) {
+    const service = await updateServicesDb(id, services);
 
     return service;
   }

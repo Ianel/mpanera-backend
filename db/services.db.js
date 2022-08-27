@@ -34,4 +34,31 @@ const getServicesByIdDb = async (house_id) => {
   return services[0];
 };
 
-module.exports = { addServicesDb, getServicesByIdDb };
+const updateServicesDb = async (
+  id,
+  {
+    interior_toilets,
+    outdoor_toilets,
+    garage,
+    garden,
+    running_water,
+    swimming_pool,
+  }
+) => {
+  const { rows: services } = await pool.query(
+    "UPDATE services SET interior_toilets = $1, outdoor_toilets = $2, garage = $3, garden = $4, running_water = $5, swimming_pool = $6 WHERE services_id = $7 RETURNING *",
+    [
+      interior_toilets,
+      outdoor_toilets,
+      garage,
+      garden,
+      running_water,
+      swimming_pool,
+      id,
+    ]
+  );
+
+  return services[0];
+};
+
+module.exports = { addServicesDb, getServicesByIdDb, updateServicesDb };
