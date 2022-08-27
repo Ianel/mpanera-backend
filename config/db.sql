@@ -13,7 +13,7 @@ CREATE TABLE users (
     birthdate DATE,
     adress CHARACTER VARYING(200),
     facebook_name CHARACTER VARYING(200), 
-    profile_avatar CHARACTER VARYING(50), 
+    profile_avatar CHARACTER VARYING(25), 
     about TEXT,
     PRIMARY KEY (user_id) 
 );
@@ -47,7 +47,7 @@ CREATE TABLE house_type (
 
 CREATE TABLE house_photo (
     house_photo_id SERIAL NOT NULL,
-    path CHARACTER VARYING(50) NOT NULL,
+    path CHARACTER VARYING(100) NOT NULL,
     house_id INTEGER NOT NULL,
     PRIMARY KEY (house_photo_id)
 );
@@ -68,7 +68,7 @@ CREATE TABLE services (
     garage boolean,
     swimming_pool boolean,
     garden boolean,
-    accessibility CHARACTER VARYING (100),
+    house_id INTEGER,
     PRIMARY KEY (services_id)
 );
 
