@@ -36,6 +36,7 @@ CREATE TABLE houses (
     published_on DATE DEFAULT CURRENT_DATE,
     house_type CHARACTER VARYING(50) NOT NULL,
     user_id INTEGER NOT NULL,
+    is_house_active boolean DEFAULT true,
     PRIMARY KEY (house_id)
 );
 

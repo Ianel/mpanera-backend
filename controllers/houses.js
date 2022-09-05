@@ -61,3 +61,15 @@ exports.deleteHouse = async (req, res) => {
     results: house,
   });
 };
+
+exports.markHouseAsActive = async (req, res) => {
+  const _id = req.params.id;
+  const { isHouseActive } = req.body;
+
+  const house = await HouseService.markHouseAsActive(_id, isHouseActive);
+
+  res.status(200).json({
+    status: "success",
+    results: house,
+  });
+};

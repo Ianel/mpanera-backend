@@ -150,6 +150,14 @@ const updateHouseDb = async (
   return house;
 };
 
+const markHouseAsActiveDb = async (id, isHouseActive) => {
+  const { rows: houses } = await pool.query(
+    "UPDATE houses SET is_house_active = $1 WHERE house_id = $2 RETURNING *",
+    [isHouseActive, id]
+  );
+  return houses[0];
+};
+
 module.exports = {
   createHouseDb,
   getHouseByIdDb,
@@ -157,4 +165,5 @@ module.exports = {
   getAllHousesDb,
   updateHouseDb,
   deleteHouseDb,
+  markHouseAsActiveDb,
 };

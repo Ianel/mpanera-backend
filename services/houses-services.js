@@ -5,6 +5,7 @@ const {
   getHousesByCityNameDb,
   deleteHouseDb,
   updateHouseDb,
+  markHouseAsActiveDb,
 } = require("../db/houses.db");
 
 class HouseService {
@@ -40,6 +41,12 @@ class HouseService {
 
   async updateHouse(id, data) {
     const house = await updateHouseDb(id, data);
+
+    return house;
+  }
+
+  async markHouseAsActive(id, data) {
+    const house = await markHouseAsActiveDb(id, data);
 
     return house;
   }
